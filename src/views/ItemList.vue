@@ -20,7 +20,9 @@
 
     export default {
         name: 'item-list',
-
+        beforeDestroy() {
+            this.$store.unregisterModule('footer')
+        },
         components: {
             Item
         },
@@ -44,6 +46,12 @@
             rankIndex() {
                 return this.$store.state.rankIndex[this.type];
             }
+        },
+
+        mounted () {
+            this.$store.dispatch('footer/changeTabIndex', {
+                path: '/fastnews'
+            })
         },
 
         methods: {
